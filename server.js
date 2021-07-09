@@ -37,10 +37,3 @@ const server = http.createServer((req, res) => {
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
-
-/*
-Mong DB access 
---------------
-Username: Admin
-Password:3tqtyWpcLh8V7k6A
-*/

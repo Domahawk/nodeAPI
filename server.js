@@ -1,8 +1,8 @@
 const http = require('http');
-const { getUsers, getSingleUser, saveUser, deleteUser, preflightOptions, getId } = require('./func');
+const { getUsers, getSingleUser, saveUser, deleteUser, preflightOptions, getId, connect } = require('./func');
 const mongoose = require('mongoose');
 
-const dbconn = 'mongodb://localhost/nodeapi'
+const dbconn = `mongodb+srv://admin:${connect}@nodeapi.ofka6.mongodb.net/nodeapi?retryWrites=true&w=majority`
 mongoose.connect(dbconn, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 
 const db = mongoose.connection

@@ -47,10 +47,18 @@ function getSingleUser(res, req, id){
     })
 }
 
+function checkId(arr) {
+    if (arr === undefined) {
+        return '0'
+    } else {
+        return arr.id
+    }
+}
+
 async function saveUser(res, req){
 
-    const usersArr = await User.find({}).exec()    
-    const lastUserID = usersArr[usersArr.length-1].id
+    const usersArr = await User.find({}).exec()
+    const lastUserID = checkId(usersArr[usersArr.length-1])
     const newUserID = parseInt(lastUserID) + 1
     const body = await handlePost(req)
     const { firstName, lastName, email } = JSON.parse(body)
@@ -137,11 +145,14 @@ function getId(req) {
     return id
 }
 
+const connect = 'admin123456789'
+
 module.exports = {
     getUsers,
     getSingleUser,
     saveUser,
     deleteUser,
     preflightOptions,
-    getId
+    getId,
+    connect
 }

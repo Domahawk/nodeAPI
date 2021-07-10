@@ -1,6 +1,6 @@
 const http = require('http');
 const { getUsers, saveUser, deleteUser, preflightOptions, getId } = require('./func');
-const { connect } = require ('./utils')
+const { headers, connect } = require ('./utils')
 const mongoose = require('mongoose');
 
 const dbconn = `mongodb+srv://admin:${connect}@nodeapi.ofka6.mongodb.net/nodeapi?retryWrites=true&w=majority`
@@ -23,10 +23,7 @@ const server = http.createServer((req, res) => {
     }else if(req.url && req.method === 'OPTIONS') {
         preflightOptions(res)
     } else {
-        res.writeHead(404, {                
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-    })
+        res.writeHead(404, headers)
         res.end(JSON.stringify({message: 'Route not found'}))
     }
 })

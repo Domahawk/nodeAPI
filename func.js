@@ -4,7 +4,6 @@ const { handlePost, getId, checkId, headers } = require('./utils')
 function getUsers(req, res){
     User.find({}).exec((err, result) => {
         if (err) {
-            console.log(err)
             res.writeHead(201, headers)
             res.end(JSON.stringify({message: "Something went very wrong"}))
         } else {   

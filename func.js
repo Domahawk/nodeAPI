@@ -1,4 +1,5 @@
 const User = require('./user.model')
+const { handlePost, getId, checkId } = require('./utils')
 
 function getUsers(req, res){
     User.find({}).exec((err, result) => {
@@ -21,14 +22,6 @@ function getUsers(req, res){
             res.end(JSON.stringify(result))
         }
     })
-}
-
-function checkId(arr) {
-    if (arr === undefined) {
-        return '0'
-    } else {
-        return arr.id
-    }
 }
 
 async function saveUser(res, req){
@@ -98,26 +91,6 @@ function preflightOptions (res) {
     });
     res.end()
     return;
-}
-
-function handlePost(req) {
-    return new Promise ((resolve, reject) => {
-        let body = ''
-
-        req.on('data', (chunk) => {
-            body += chunk.toString()
-        })
-
-        req.on('end', () => {
-            resolve(body)
-        })
-    })
-}
-
-function getId(req) {
-    const urlArr = req.url.split('/')
-    const id = urlArr[urlArr.length-1]
-    return id
 }
 
 const connect = 'admin123456789'

@@ -1,5 +1,6 @@
 const http = require('http');
-const { getUsers, saveUser, deleteUser, preflightOptions, getId, connect } = require('./func');
+const { getUsers, saveUser, deleteUser, preflightOptions, getId } = require('./func');
+const { connect } = require ('./utils')
 const mongoose = require('mongoose');
 
 const dbconn = `mongodb+srv://admin:${connect}@nodeapi.ofka6.mongodb.net/nodeapi?retryWrites=true&w=majority`

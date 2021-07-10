@@ -58,13 +58,10 @@ function preflightOptions (res) {
     return;
 }
 
-const connect = 'admin123456789'
-
 module.exports = {
     getUsers,
     saveUser,
     deleteUser,
     preflightOptions,
-    getId,
-    connect
+    getId
 }

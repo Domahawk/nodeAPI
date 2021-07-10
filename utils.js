@@ -33,9 +33,12 @@ const headers = {
     'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
 }
 
+const connect = 'admin123456789'
+
 module.exports = {
     handlePost,
     getId,
     checkId,
-    headers
+    headers,
+    connect
 }

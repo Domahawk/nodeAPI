@@ -14,7 +14,6 @@ function getUsers(req, res){
 }
 
 async function saveUser(res, req){
-
     const usersArr = await User.find({}).exec()
     const lastUserID = checkId(usersArr[usersArr.length-1])
     const newUserID = parseInt(lastUserID) + 1

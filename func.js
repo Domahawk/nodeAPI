@@ -1,24 +1,14 @@
 const User = require('./user.model')
-const { handlePost, getId, checkId } = require('./utils')
+const { handlePost, getId, checkId, headers } = require('./utils')
 
 function getUsers(req, res){
     User.find({}).exec((err, result) => {
         if (err) {
             console.log(err)
-            res.writeHead(201, {                
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-        })
+            res.writeHead(201, headers)
             res.end(JSON.stringify({message: "Something went very wrong"}))
         } else {   
-            res.writeHead(201, {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-            })
+            res.writeHead(201, header)
             res.end(JSON.stringify(result))
         }
     })

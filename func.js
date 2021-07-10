@@ -29,20 +29,10 @@ async function saveUser(res, req){
     const newData = new User ({id: newUserID.toString(), ...dataObj})
     newData.save(function(err, result) {
         if(err) {
-            res.writeHead(400, {                
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-        })
+            res.writeHead(400, headers)
             res.end(JSON.stringify({ message: 'Please pass valid JSON data' }))
         } else {
-            res.writeHead(201, {                
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-        })
+            res.writeHead(201, headers)
             res.end(JSON.stringify(newData))
         }
     })
@@ -51,20 +41,10 @@ async function saveUser(res, req){
 function deleteUser(req, res, id){
     User.deleteOne({ id: id }).then((result) => {
         if(result.deletedCount === 1){
-            res.writeHead(202, {                
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-        })
+            res.writeHead(202, headers)
             res.end(JSON.stringify({ message: `User with id ${id} deleted` }))
         } else {
-            res.writeHead(202, {                
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-        })
+            res.writeHead(202, headers)
             res.end(JSON.stringify({ message: `User with id ${id} not found or something went very wrong` }))           
         }
 
@@ -73,12 +53,7 @@ function deleteUser(req, res, id){
 }
 
 function preflightOptions (res) {
-    res.writeHead(204, {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-    });
+    res.writeHead(204, headers);
     res.end()
     return;
 }

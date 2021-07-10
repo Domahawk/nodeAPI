@@ -1,5 +1,5 @@
 const http = require('http');
-const { getUsers, getSingleUser, saveUser, deleteUser, preflightOptions, getId, connect } = require('./func');
+const { getUsers, saveUser, deleteUser, preflightOptions, getId, connect } = require('./func');
 const mongoose = require('mongoose');
 
 const dbconn = `mongodb+srv://admin:${connect}@nodeapi.ofka6.mongodb.net/nodeapi?retryWrites=true&w=majority`
@@ -14,12 +14,8 @@ const PORT = process.env.PORT || 5000
 const server = http.createServer((req, res) => {
     if(req.url === '/users' && req.method === 'GET') {
         getUsers(req, res);
-    } else if(req.url.match(/\user\/[0-9]+/) && req.method === 'GET') {
-        const id = getId(req)
-        getSingleUser(res, req, id)
     } else if(req.url === '/post' && req.method === 'POST') {
         saveUser(res, req)
-/*OPTIONS zbog cors preflight errora*/
     } else if(req.url.match(/\user\/[0-9]+/) && req.method === 'DELETE') {
         id = getId(req)
         deleteUser(req, res, id) 

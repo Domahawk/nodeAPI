@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-const { exists } = require('./user.model');
 const User = require('./user.model')
 
 function getUsers(req, res){
@@ -20,28 +18,6 @@ function getUsers(req, res){
                 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
                 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
             })
-            res.end(JSON.stringify(result))
-        }
-    })
-}
-
-function getSingleUser(res, req, id){
-    User.find({ id: id }).exec((err, result) => {
-        if(err || !result[0] ) {
-            res.writeHead(404, {                
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-        })
-            res.end(JSON.stringify({message: "User not found"}))
-        } else {
-            res.writeHead(200, {              
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-        })
             res.end(JSON.stringify(result))
         }
     })
@@ -70,7 +46,6 @@ async function saveUser(res, req){
     const newData = new User ({id: newUserID.toString(), ...dataObj})
     newData.save(function(err, result) {
         if(err) {
-            console.log(err)
             res.writeHead(400, {                
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
@@ -149,7 +124,6 @@ const connect = 'admin123456789'
 
 module.exports = {
     getUsers,
-    getSingleUser,
     saveUser,
     deleteUser,
     preflightOptions,

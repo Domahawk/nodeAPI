@@ -9,7 +9,7 @@ const db = mongoose.connection
 db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('connected to DB'))
 
-const PORT = process.send.PORT || 5000
+const PORT = process.env.PORT || 5000
 
 const server = http.createServer((req, res) => {
     if(req.url === '/users' && req.method === 'GET') {

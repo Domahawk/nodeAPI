@@ -8,7 +8,7 @@ function getUsers(req, res){
             res.writeHead(201, headers)
             res.end(JSON.stringify({message: "Something went very wrong"}))
         } else {   
-            res.writeHead(201, header)
+            res.writeHead(201, headers)
             res.end(JSON.stringify(result))
         }
     })
